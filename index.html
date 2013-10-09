@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		
+		<title>WRONG WAY</title>
+
+		<script type="text/javascript" src="core/three.min.js"></script>
+
+		<script type="text/javascript" src="core/controls/OrbitControls.js"></script>
+
+		<script type="text/javascript" src="core/shaders/CopyShader.js"></script>
+		<script type="text/javascript" src="core/shaders/FXAAShader.js"></script>
+		<script type="text/javascript" src="core/shaders/FilmShader.js"></script>
+		<script type="text/javascript" src="core/shaders/BlendShader.js"></script>
+		<script type="text/javascript" src="core/shaders/RGBShiftShader.js"></script>
+
+		<script type="text/javascript" src="core/postprocessing/EffectComposer.js"></script>
+		<script type="text/javascript" src="core/postprocessing/MaskPass.js"></script>
+		<script type="text/javascript" src="core/postprocessing/RenderPass.js"></script>
+		<script type="text/javascript" src="core/postprocessing/ShaderPass.js"></script>
+		<script type="text/javascript" src="core/postprocessing/FilmPass.js"></script>
+		<script type="text/javascript" src="app/App.js?version=1"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<a style="position:fixed; left: 5px; top: 5px; background: #333; padding: 3px; z-index:999; font: normal 12px Arial; text-decoration: none; color: #fff; border: solid 1px #888;"
+			href="javascript:App.useComposer = !App.useComposer">postprocessing on/off</a>
+		<script>
+			App.start({ useComposer: true, filmPass: true, rgbPass: true });
+
+			App.loadEnvironment();
+
+			App.add(new THREE.AmbientLight(0x111111));
+
+			var light = new THREE.PointLight(0xffffff, 1, 20000);
+			light.position = new THREE.Vector3(0,50,220);
+
+			for(var aa=0;aa<5;aa++){
+				for(var bb=0; bb<5; bb++){
+					for(var cc=0; cc<5;cc++){
+						var mesh = new THREE.Mesh( new THREE.CubeGeometry(40, 40, 40,1,1,1), 
+							new THREE.MeshPhongMaterial({ color: 0xff0000, emissive: 0x020202, shininess: 100, specular: '#a9fcff' }));
+						mesh.position = new THREE.Vector3(aa*100,bb*100,cc*100);
+						App.add(mesh);
+					}
+				}
+			}
+			
+			App.add(light);
+
+
+			controls = new THREE.OrbitControls( App.camera );
+
+		</script>
+	</body>
+</html>
