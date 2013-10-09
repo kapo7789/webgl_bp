@@ -89,7 +89,7 @@ var App = {
 	},
 	// REMOVE THIS
 	loadEnvironment: function() {
-		var imagePrefix = "/newpr/images/skybox/dd_";
+		var imagePrefix = "images/skybox/dd_";
 		var directions  = ["right1", "left2", "top3", "bottom4", "front5", "back6"];
 		var imageSuffix = ".png";
 		
